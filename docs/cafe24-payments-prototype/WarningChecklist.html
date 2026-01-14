@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>심사 준비 체크리스트 - 경고 표시</title>
+  <style>
+    /* Cafe24 Design System - Warning Checklist */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar */
+    .top-nav {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .nav-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: #f3f4f6;
+      color: #2f67f6;
+    }
+
+    .nav-links a.active {
+      background-color: #eff6ff;
+      color: #2f67f6;
+      font-weight: 600;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Checklist Item */
+    .checklist-item {
+      display: flex;
+      gap: 16px;
+      padding: 24px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Warning Icon (노란색 경고) */
+    .warning-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background-color: #fef3c7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .warning-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: #f59e0b;
+    }
+
+    /* Content */
+    .checklist-content {
+      flex: 1;
+    }
+
+    .checklist-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .checklist-description {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    /* Button */
+    .action-button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+      background-color: #2f67f6;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .action-button:hover {
+      background-color: #2757d6;
+    }
+
+    .action-button:active {
+      background-color: #1f47b6;
+    }
+
+    /* Highlight Important Text */
+    .highlight {
+      color: #f59e0b;
+      font-weight: 500;
+    }
+
+    /* Note Text (작은 설명) */
+    .note-text {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-title">🎨 Cafe24 UI 컴포넌트</div>
+    <div class="nav-links">
+      <a href="ServiceApplicationButtons.html">버튼</a>
+      <a href="AccordionSection.html">아코디언</a>
+      <a href="ProgressSteps.html">프로그레스</a>
+      <a href="WarningChecklist.html" class="active">체크리스트</a>
+      <a href="index.html">📋 전체보기</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+    <!-- Checklist Item 1: 상품 등록 -->
+    <div class="checklist-item">
+      <div class="warning-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+        </svg>
+      </div>
+      <div class="checklist-content">
+        <h3 class="checklist-title">상품 1개를 올려 주세요</h3>
+        <p class="checklist-description">
+          <span class="highlight">심사 시작을 위해 상품이 1개 이상 등록 필요해요.</span>
+          <span class="note-text">(샘플 상품은 심사에서 제외되어요.)</span><br>
+          상품 설명은 심사 후에 수정할 수 있어요.
+        </p>
+        <button class="action-button" onclick="handleProductRegistration()">
+          상품 등록하기
+        </button>
+      </div>
+    </div>
+
+    <!-- Checklist Item 2: 쇼핑몰 정보 입력 -->
+    <div class="checklist-item">
+      <div class="warning-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+        </svg>
+      </div>
+      <div class="checklist-content">
+        <h3 class="checklist-title">쇼핑몰 화면에 정보를 입력해 주세요</h3>
+        <p class="checklist-description">
+          <span class="highlight">심사 시작을 위해 쇼핑몰 정보 입력이 필요해요.</span><br>
+          사업자등록증과 동일한 정보로 입력해 주세요.
+        </p>
+        <button class="action-button" onclick="handleInfoInput()">
+          입력하기
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function handleProductRegistration() {
+      console.log('상품 등록하기 버튼 클릭');
+      alert('상품 등록 페이지로 이동합니다.');
+      // 실제 구현:
+      // window.location.href = '/products/new';
+    }
+
+    function handleInfoInput() {
+      console.log('입력하기 버튼 클릭');
+      alert('쇼핑몰 정보 입력 페이지로 이동합니다.');
+      // 실제 구현:
+      // window.location.href = '/shop/settings';
+    }
+  </script>
+</body>
+</html>

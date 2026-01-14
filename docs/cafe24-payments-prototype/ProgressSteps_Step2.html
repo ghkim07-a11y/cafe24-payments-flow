@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카페24페이먼츠 신청 - 2단계 (판매자 확인)</title>
+  <style>
+    /* Cafe24 Design System - Progress Steps + Accordion */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar */
+    .top-nav {
+      background-color: #e8e9eb;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .nav-badge {
+      display: inline-block;
+      background-color: #4b5563;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .nav-right {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+
+    /* Progress Steps Container */
+    .progress-section {
+      background-color: #f9fafb;
+      padding: 40px 80px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Background Line */
+    .progress-line {
+      position: absolute;
+      top: 15px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background-color: #d1d5db;
+      z-index: 1;
+    }
+
+    /* Active Progress Line */
+    .progress-line-active {
+      position: absolute;
+      top: 15px;
+      left: 10%;
+      height: 1px;
+      background-color: #2f67f6;
+      z-index: 2;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* Step Item */
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+      flex: 1;
+    }
+
+    /* Step Circle */
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: #9ca3af;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    /* Active Step Circle */
+    .step-item.active .step-circle {
+      background-color: #2f67f6;
+      border-color: #2f67f6;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Step Label */
+    .step-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: #6b7280;
+      text-align: center;
+      white-space: nowrap;
+      transition: color 0.3s ease;
+    }
+
+    /* Active Step Label */
+    .step-item.active .step-label {
+      color: #1f2937;
+      font-weight: 500;
+    }
+
+    /* Content Area */
+    .content-area {
+      padding: 40px 80px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 24px;
+    }
+
+    /* Accordion Section */
+    .accordion-wrapper {
+      margin-bottom: 30px;
+    }
+
+    .accordion-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 18px;
+      background-color: #ffffff;
+      border: 2px solid #2f67f6;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .accordion-trigger:hover {
+      background-color: #f9fafb;
+    }
+
+    .accordion-trigger.active {
+      background-color: #eff6ff;
+    }
+
+    .trigger-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #2f67f6;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trigger-icon {
+      font-size: 16px;
+      color: #2f67f6;
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-trigger.active .trigger-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .accordion-content.active {
+      max-height: 800px;
+    }
+
+    .content-inner {
+      padding: 20px;
+      background-color: #f0f4ff;
+      border: 1px solid #d4e3ff;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      margin-top: -6px;
+    }
+
+    .info-box {
+      display: flex;
+      gap: 12px;
+      padding: 16px;
+      background-color: #ffffff;
+      border-left: 3px solid #2f67f6;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .info-icon {
+      flex-shrink: 0;
+      color: #2f67f6;
+      font-size: 18px;
+      margin-top: 2px;
+    }
+
+    .info-text {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #374151;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .checkbox-group,
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checkbox-item,
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox-item input[type="checkbox"],
+    .radio-item input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-item label,
+    .radio-item label {
+      font-size: 14px;
+      color: #374151;
+      cursor: pointer;
+    }
+
+    .form-select {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #1f2937;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: #2f67f6;
+    }
+
+    .subsection {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .consent-box {
+      margin-top: 30px;
+      padding: 16px;
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    .consent-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .consent-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .consent-text {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .consent-text a {
+      color: #2f67f6;
+      text-decoration: underline;
+    }
+
+    /* Navigation Buttons */
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 40px;
+      padding: 30px 0;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .btn {
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      outline: none;
+    }
+
+    .btn-outline {
+      background-color: #ffffff;
+      color: #6b7280;
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-outline:hover {
+      background-color: #f9fafb;
+      border-color: #9ca3af;
+    }
+
+    .btn-primary {
+      background-color: #2f67f6;
+      color: #ffffff;
+      border: 1px solid #2f67f6;
+    }
+
+    .btn-primary:hover {
+      background-color: #2757d6;
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .progress-section {
+        padding: 30px 20px;
+      }
+
+      .content-area {
+        padding: 30px 20px;
+      }
+
+      .step-label {
+        font-size: 11px;
+      }
+
+      .step-circle {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-title">
+      카페24페이먼츠 신청 <span class="nav-badge">가이드</span>
+    </div>
+    <div class="nav-right">
+      카페24페이먼츠 이용약관안내
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <!-- Progress Section -->
+      <div class="progress-section">
+        <div class="progress-steps">
+          <!-- Background Line -->
+          <div class="progress-line"></div>
+          <div class="progress-line-active" id="progressLineActive"></div>
+
+          <!-- Step 1: 쇼핑몰 정보 -->
+          <div class="step-item" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">쇼핑몰 정보</div>
+          </div>
+
+          <!-- Step 2: 판매자 확인 -->
+          <div class="step-item active" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">판매자 확인</div>
+          </div>
+
+          <!-- Step 3: 서류 업로드 -->
+          <div class="step-item" data-step="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">서류 업로드</div>
+          </div>
+
+          <!-- Step 4: 본인인증 -->
+          <div class="step-item" data-step="4">
+            <div class="step-circle">4</div>
+            <div class="step-label">본인인증</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <h2 class="section-title">자금세탁방지법 확인</h2>
+
+        <!-- Accordion -->
+        <div class="accordion-wrapper">
+          <button class="accordion-trigger" id="accordionTrigger" onclick="toggleAccordion()">
+            <span class="trigger-text">
+              💡 왜 필요한가요?
+            </span>
+            <span class="trigger-icon">▼</span>
+          </button>
+
+          <div class="accordion-content" id="accordionContent">
+            <div class="content-inner">
+              <div class="info-box">
+                <div class="info-icon">ℹ️</div>
+                <p class="info-text">
+                  특정 금융거래 정보의 보고 및 이용 등에 관한 법률 제5조의 2(이하 '특정금융정보법')에 따라 가입 시 또는 판매대급의 정산 지급 전 판매자의 신원확인 절차를 진행합니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Content -->
+        <form id="verificationForm">
+          <!-- 신분확인서 -->
+          <div class="form-group">
+            <label class="form-label">신분확인서는 어떤 내용이 포함되나요?</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="check1" name="identity_contents">
+                <label for="check1">네, 내용 확인했습니다.</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 대표자가 외국인 -->
+          <div class="form-group">
+            <label class="form-label">대표자가 외국인 성별 소유자 인가요?</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="check2" name="foreign_owner">
+                <label for="check2">네, 외국인 소유자입니다.</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 공익 대표자 -->
+          <div class="form-group">
+            <label class="form-label">공익 대표자가 있나요?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="public_yes" name="public_rep" value="yes">
+                <label for="public_yes">예</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="public_no" name="public_rep" value="no" checked>
+                <label for="public_no">아니요</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 전자금융 서비스 -->
+          <div class="form-group">
+            <label class="form-label">전자금융 서비스 이용 목적을 무엇인가요?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="service1" name="service_purpose" value="sale" checked>
+                <label for="service1">서비스판</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="service2" name="service_purpose" value="purchase">
+                <label for="service2">구매 목적</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 소득원 -->
+          <div class="form-group">
+            <label class="form-label">소득원 문의 자금의 출처를 알려 주세요.</label>
+            <select class="form-select" name="income_source">
+              <option value="">선택해 주세요</option>
+              <option value="business">사업소득</option>
+              <option value="salary">근로소득</option>
+              <option value="investment">투자소득</option>
+              <option value="other">기타</option>
+            </select>
+          </div>
+
+          <!-- 비트코인 -->
+          <div class="form-group">
+            <label class="form-label">비트코인과 같은 가상자산 매매, 매수, 중개(예: 게임 아이템, 관련 아이템 등 가상자산 매매가 일절 없을 경우?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="crypto_yes" name="crypto" value="yes">
+                <label for="crypto_yes">예</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="crypto_no" name="crypto" value="no" checked>
+                <label for="crypto_no">아니요</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Consent Section -->
+          <div class="consent-box">
+            <div class="consent-item">
+              <input type="checkbox" id="consent_main" name="consent">
+              <label for="consent_main" class="consent-text">
+                위와 같은 소유권 등이 법판자입니다.<br>
+                상품의 신원의 사원신원 이들을 정리하고, 실제 판매자의 신원 반을 본인 성, 고사 가능 물량의 판매 인터 사업 서비스의 이용 거부 사항입니다. 이외 반시된 확산시 항변이 정보 및, 신사각 가품을 이 오을뎀 속성됩니다.
+              </label>
+            </div>
+          </div>
+        </form>
+
+        <!-- Navigation Buttons -->
+        <div class="button-group">
+          <button class="btn btn-outline" onclick="previousStep()">
+            이전
+          </button>
+          <button class="btn btn-primary" onclick="nextStep()">
+            다음
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 현재 스텝 상태
+    let currentStep = 2;
+    const totalSteps = 4;
+
+    // 초기 프로그레스 바 설정
+    function initProgress() {
+      const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 80;
+      document.getElementById('progressLineActive').style.width = progressPercentage + '%';
+    }
+
+    // 아코디언 토글
+    function toggleAccordion() {
+      const trigger = document.getElementById('accordionTrigger');
+      const content = document.getElementById('accordionContent');
+
+      trigger.classList.toggle('active');
+      content.classList.toggle('active');
+
+      const isExpanded = content.classList.contains('active');
+      trigger.setAttribute('aria-expanded', isExpanded);
+    }
+
+    // 다음 단계
+    function nextStep() {
+      // 3단계(서류 업로드)로 이동
+      window.location.href = 'ProgressSteps_Step3.html';
+    }
+
+    // 이전 단계
+    function previousStep() {
+      // 1단계로 이동
+      window.location.href = 'ProgressSteps_Updated.html';
+    }
+
+    // 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+      initProgress();
+
+      const trigger = document.getElementById('accordionTrigger');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-controls', 'accordionContent');
+    });
+
+    // 키보드 접근성
+    document.getElementById('accordionTrigger').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleAccordion();
+      }
+    });
+  </script>
+</body>
+</html>

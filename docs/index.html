@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카페24 UI 컴포넌트 목록</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2f67f6 0%, #1f47b6 100%);
+      color: #ffffff;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .component-card {
+      background-color: #f9fafb;
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .component-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #2f67f6, #667eea);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .component-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(47, 103, 246, 0.2);
+      border-color: #2f67f6;
+    }
+
+    .component-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #2f67f6, #667eea);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background-color: #2f67f6;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .card-link:hover {
+      background-color: #2757d6;
+      transform: translateX(4px);
+    }
+
+    .card-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .footer {
+      padding: 24px 40px;
+      background-color: #f9fafb;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .badge-new {
+      background-color: #dcfce7;
+      color: #15803d;
+    }
+
+    .badge-updated {
+      background-color: #dbeafe;
+      color: #1e40af;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .content {
+        padding: 24px;
+      }
+
+      .component-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎨 카페24 UI 컴포넌트</h1>
+      <p>생성된 컴포넌트를 바로 확인하세요</p>
+    </div>
+
+    <div class="content">
+      <div class="component-grid">
+        <!-- Card 1: Service Application Buttons -->
+        <div class="component-card">
+          <span class="badge badge-updated">Updated</span>
+          <div class="card-icon">🔘</div>
+          <h3 class="card-title">서비스 신청 버튼</h3>
+          <p class="card-description">
+            이전/완료 버튼이 포함된 서비스 신청 버튼 그룹입니다.
+          </p>
+          <a href="ServiceApplicationButtons.html" class="card-link">
+            바로 보기
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 2: Accordion Section -->
+        <div class="component-card">
+          <span class="badge badge-new">New</span>
+          <div class="card-icon">📋</div>
+          <h3 class="card-title">접기/펼치기 섹션</h3>
+          <p class="card-description">
+            자금세탁방지법 정보를 표시하는 아코디언 컴포넌트입니다.
+          </p>
+          <a href="AccordionSection.html" class="card-link">
+            바로 보기
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 3: Progress Steps -->
+        <div class="component-card">
+          <span class="badge badge-new">New</span>
+          <div class="card-icon">📊</div>
+          <h3 class="card-title">4단계 프로그레스 바</h3>
+          <p class="card-description">
+            본인인증 단계가 추가된 인터랙티브 프로그레스 바입니다.
+          </p>
+          <a href="ProgressSteps.html" class="card-link">
+            바로 보기
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Card 4: Warning Checklist -->
+        <div class="component-card">
+          <span class="badge badge-updated">Updated</span>
+          <div class="card-icon">⚠️</div>
+          <h3 class="card-title">경고 체크리스트</h3>
+          <p class="card-description">
+            심사 준비를 위한 노란색 경고 표시 체크리스트입니다.
+          </p>
+          <a href="WarningChecklist.html" class="card-link">
+            바로 보기
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2026 Cafe24. All rights reserved. | Generated with cds-image-to-code skill
+    </div>
+  </div>
+
+  <script>
+    // 페이지 로드 시 애니메이션
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.component-card');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+
+        setTimeout(() => {
+          card.style.transition = 'all 0.5s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+    });
+
+    // 링크 클릭 로깅
+    document.querySelectorAll('.card-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const componentName = this.closest('.component-card').querySelector('.card-title').textContent;
+        console.log(`${componentName} 컴포넌트 열기`);
+      });
+    });
+  </script>
+</body>
+</html>

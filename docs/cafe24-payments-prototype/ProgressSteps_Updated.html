@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카페24페이먼츠 신청 - 4단계 프로그레스</title>
+  <style>
+    /* Cafe24 Design System - Progress Steps (Updated) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar */
+    .top-nav {
+      background-color: #e8e9eb;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .nav-badge {
+      display: inline-block;
+      background-color: #4b5563;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .nav-right {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+
+    /* Progress Steps Container */
+    .progress-section {
+      background-color: #f9fafb;
+      padding: 40px 80px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Background Line */
+    .progress-line {
+      position: absolute;
+      top: 15px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background-color: #d1d5db;
+      z-index: 1;
+    }
+
+    /* Active Progress Line */
+    .progress-line-active {
+      position: absolute;
+      top: 15px;
+      left: 10%;
+      height: 1px;
+      background-color: #2f67f6;
+      z-index: 2;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* Step Item */
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+      flex: 1;
+    }
+
+    /* Step Circle */
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: #9ca3af;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    /* Active Step Circle */
+    .step-item.active .step-circle {
+      background-color: #2f67f6;
+      border-color: #2f67f6;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Step Label */
+    .step-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: #6b7280;
+      text-align: center;
+      white-space: nowrap;
+      transition: color 0.3s ease;
+    }
+
+    /* Active Step Label */
+    .step-item.active .step-label {
+      color: #1f2937;
+      font-weight: 500;
+    }
+
+    /* Content Area */
+    .content-area {
+      padding: 40px 80px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .info-box {
+      background-color: #fef9e7;
+      border: 1px solid #f9e79f;
+      border-radius: 4px;
+      padding: 16px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .info-icon {
+      color: #f39c12;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .info-content {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .info-link {
+      color: #2f67f6;
+      text-decoration: none;
+      font-weight: 500;
+      float: right;
+      margin-top: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #1f2937;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #2f67f6;
+    }
+
+    .form-input:disabled {
+      background-color: #f3f4f6;
+      color: #9ca3af;
+    }
+
+    .form-help {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .form-help a {
+      color: #2f67f6;
+      text-decoration: underline;
+    }
+
+    /* Navigation Buttons */
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 40px;
+      padding: 30px 0;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .btn {
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      outline: none;
+    }
+
+    .btn-outline {
+      background-color: #ffffff;
+      color: #6b7280;
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-outline:hover {
+      background-color: #f9fafb;
+      border-color: #9ca3af;
+    }
+
+    .btn-primary {
+      background-color: #2f67f6;
+      color: #ffffff;
+      border: 1px solid #2f67f6;
+    }
+
+    .btn-primary:hover {
+      background-color: #2757d6;
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .progress-section {
+        padding: 30px 20px;
+      }
+
+      .content-area {
+        padding: 30px 20px;
+      }
+
+      .step-label {
+        font-size: 11px;
+      }
+
+      .step-circle {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-title">
+      카페24페이먼츠 신청 <span class="nav-badge">가이드</span>
+    </div>
+    <div class="nav-right">
+      카페24페이먼츠 이용약관안내
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <!-- Progress Section -->
+      <div class="progress-section">
+        <div class="progress-steps">
+          <!-- Background Line -->
+          <div class="progress-line"></div>
+          <div class="progress-line-active" id="progressLineActive"></div>
+
+          <!-- Step 1: 쇼핑몰 정보 -->
+          <div class="step-item active" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">쇼핑몰 정보</div>
+          </div>
+
+          <!-- Step 2: 판매자 확인 -->
+          <div class="step-item" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">판매자 확인</div>
+          </div>
+
+          <!-- Step 3: 서류 업로드 -->
+          <div class="step-item" data-step="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">서류 업로드</div>
+          </div>
+
+          <!-- Step 4: 본인인증 -->
+          <div class="step-item" data-step="4">
+            <div class="step-circle">4</div>
+            <div class="step-label">본인인증</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <h2 class="section-title">기본 정보</h2>
+
+        <div class="info-box">
+          <div class="info-icon">💡</div>
+          <div class="info-content">
+            모든 사업자 정보는 사업자등록증과 동일하게 입력해야 해요.<br>
+            국세청 홈택스를 통해 온라인에서 사업자 등록을 발급이 가능해요.
+            <a href="#" class="info-link">국세청 홈택스 바로가기 ></a>
+          </div>
+        </div>
+
+        <form id="businessForm">
+          <div class="form-group">
+            <label class="form-label">사업자 구분</label>
+            <input type="text" class="form-input" value="개인 사업자" disabled>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">사업자등록번호 (또는 고유번호)</label>
+            <input type="text" class="form-input" value="4124001362">
+            <div class="form-help">
+              <a href="#">사업자등록번호를 수정이 필요한가요?</a>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">상호(법인)명</label>
+            <input type="text" class="form-input" value="산천구">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">상호(법인)명 영문</label>
+            <input type="text" class="form-input" value="예) cafe24">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">대표자 성명(한글)</label>
+            <input type="text" class="form-input" value="김건형">
+            <div class="form-help">
+              대표자 성명은 카페24 회원 가입 시 입력된 정보입니다. 변역 변경은 카페24 헬프센터의 <a href="#">1:1문의</a>를 통해 진행해 주세요.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">사업장 주소</label>
+            <input type="text" class="form-input" value="21023" style="max-width: 200px;">
+            <button type="button" class="btn btn-outline" style="margin-left: 8px;">주소검색</button>
+            <input type="text" class="form-input" value="인천광역시 계양구 서운감로 290 (백조동)" style="margin-top: 8px;">
+            <input type="text" class="form-input" value="계양1치하우스드림 103동 403호" style="margin-top: 8px;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">대표자 휴대폰 번호</label>
+            <input type="text" class="form-input" value="01048826186">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">대표자 이메일</label>
+            <input type="text" class="form-input" value="rjsgud9885@naver.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">대표 전화</label>
+            <input type="text" class="form-input" value="01098856186">
+            <div class="form-help">
+              소원을 하단 푸터(Footer)와 카페24페이먼츠(PG) 이용 시 매출전표에 표시됩니다.
+            </div>
+          </div>
+        </form>
+
+        <!-- Navigation Buttons -->
+        <div class="button-group">
+          <button class="btn btn-outline" id="prevBtn" onclick="previousStep()" disabled>
+            이전
+          </button>
+          <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+            다음
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 현재 스텝 상태
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    // 스텝별 콘텐츠
+    const stepContents = {
+      1: {
+        title: '쇼핑몰 정보',
+        description: '서비스 신청을 위한 쇼핑몰 기본 정보를 입력해주세요.'
+      },
+      2: {
+        title: '판매자 확인',
+        description: '판매자 정보를 확인하고 필요한 정보를 입력해주세요.'
+      },
+      3: {
+        title: '서류 업로드',
+        description: '사업자등록증 등 필요한 서류를 업로드해주세요.'
+      },
+      4: {
+        title: '서류 검토',
+        description: '제출하신 서류를 검토 중입니다. 영업일 기준 1-2일 소요됩니다.'
+      }
+    };
+
+    // 스텝 업데이트 함수
+    function updateStep(step) {
+      currentStep = step;
+
+      // 모든 스텝 아이템 초기화
+      const stepItems = document.querySelectorAll('.step-item');
+      stepItems.forEach((item, index) => {
+        const stepNum = index + 1;
+        item.classList.remove('active', 'completed');
+
+        if (stepNum < currentStep) {
+          item.classList.add('completed');
+        } else if (stepNum === currentStep) {
+          item.classList.add('active');
+        }
+      });
+
+      // 진행 바 너비 계산
+      const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 80; // 80% max (좌우 10% 여백)
+      document.getElementById('progressLineActive').style.width = progressPercentage + '%';
+
+      // 버튼 상태 업데이트
+      document.getElementById('prevBtn').disabled = currentStep === 1;
+      document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '완료' : '다음';
+
+      console.log(`현재 단계: ${currentStep}/${totalSteps}`);
+    }
+
+    // 다음 단계
+    function nextStep() {
+      // 2단계(판매자 확인)로 이동
+      window.location.href = 'ProgressSteps_Step2.html';
+    }
+
+    // 이전 단계
+    function previousStep() {
+      if (currentStep > 1) {
+        updateStep(currentStep - 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+      updateStep(1);
+    });
+  </script>
+</body>
+</html>

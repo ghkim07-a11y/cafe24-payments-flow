@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신청인 확인을 위한 추가정보 입력</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 40px 24px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1f2937;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #1f2937;
+      background-color: #f9fafb;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #60a5fa;
+      background-color: #ffffff;
+    }
+
+    .form-input::placeholder {
+      color: #d1d5db;
+    }
+
+    .form-input:disabled {
+      background-color: #f3f4f6;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    /* 주민등록번호 그룹 */
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group .form-input {
+      flex: 1;
+    }
+
+    .input-group .separator {
+      font-size: 18px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .input-group .form-input:last-child {
+      text-align: center;
+      letter-spacing: 3px;
+    }
+
+    /* 셀렉트 박스 */
+    .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #1f2937;
+      background-color: #f9fafb;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239CA3AF' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: #60a5fa;
+      background-color: #ffffff;
+    }
+
+    /* 체크박스 */
+    .checkbox-group {
+      margin-top: 32px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .checkbox-item label {
+      font-size: 14px;
+      color: #6b7280;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* 버튼 */
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background-color: #60a5fa;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #3b82f6;
+    }
+
+    .btn-submit:active {
+      background-color: #2563eb;
+    }
+
+    .btn-submit:disabled {
+      background-color: #d1d5db;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">신청인 확인을 위한<br>추가정보를 입력해주세요</h1>
+    <p class="subtitle">인증한 연락처로 중요한 심사 정보들을 알려드려요.</p>
+
+    <form id="verificationForm">
+      <!-- 이름 -->
+      <div class="form-group">
+        <label class="form-label">이름</label>
+        <input type="text" class="form-input" placeholder="" value="">
+      </div>
+
+      <!-- 이메일 주소 -->
+      <div class="form-group">
+        <label class="form-label">이메일 주소</label>
+        <input type="email" class="form-input" placeholder="" value="">
+      </div>
+
+      <!-- 휴대폰 번호 -->
+      <div class="form-group">
+        <label class="form-label">휴대폰 번호</label>
+        <input type="tel" class="form-input" placeholder="" value="">
+      </div>
+
+      <!-- 주민등록번호 -->
+      <div class="form-group">
+        <label class="form-label">주민등록번호</label>
+        <div class="input-group">
+          <input type="text" class="form-input" placeholder="" maxlength="6">
+          <span class="separator">-</span>
+          <input type="password" class="form-input" placeholder="*******" maxlength="7">
+        </div>
+      </div>
+
+      <!-- 통신사 -->
+      <div class="form-group">
+        <label class="form-label">통신사</label>
+        <select class="form-select">
+          <option value="">선택해주세요</option>
+          <option value="skt">SKT</option>
+          <option value="kt">KT</option>
+          <option value="lg">LG U+</option>
+          <option value="skt_mvno">SKT 알뜰폰</option>
+          <option value="kt_mvno">KT 알뜰폰</option>
+          <option value="lg_mvno">LG U+ 알뜰폰</option>
+        </select>
+      </div>
+
+      <!-- 동의 체크박스 -->
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="consent" name="consent">
+          <label for="consent">[필수] 개인(신용)정보 수집 및 이용 동의</label>
+        </div>
+      </div>
+
+      <!-- 제출 버튼 -->
+      <button type="submit" class="btn-submit">인증번호 보내기</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('verificationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // 완료 페이지로 바로 이동
+      window.location.href = 'ApplicationStatusChecklist.html';
+    });
+
+    // 주민등록번호 앞자리 입력 제한 (숫자만)
+    const ssnInputs = document.querySelectorAll('.input-group .form-input');
+    ssnInputs.forEach(input => {
+      input.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      });
+    });
+
+    // 휴대폰 번호 입력 제한 (숫자만)
+    const phoneInput = document.querySelector('input[type="tel"]');
+    phoneInput.addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  </script>
+</body>
+</html>

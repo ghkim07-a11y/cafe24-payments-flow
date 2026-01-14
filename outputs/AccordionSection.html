@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자금세탁방지법 확인 - 접기/펼치기</title>
+  <style>
+    /* Cafe24 Design System - Accordion Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar */
+    .top-nav {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .nav-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: #f3f4f6;
+      color: #2f67f6;
+    }
+
+    .nav-links a.active {
+      background-color: #eff6ff;
+      color: #2f67f6;
+      font-weight: 600;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .accordion-section {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .accordion-header {
+      padding: 20px;
+      background-color: #ffffff;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 12px;
+    }
+
+    .accordion-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 16px;
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .accordion-trigger:hover {
+      background-color: #f3f4f6;
+      border-color: #d1d5db;
+    }
+
+    .accordion-trigger.active {
+      background-color: #eff6ff;
+      border-color: #2f67f6;
+    }
+
+    .trigger-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #2f67f6;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trigger-text svg {
+      color: #f59e0b;
+      flex-shrink: 0;
+    }
+
+    .trigger-icon {
+      font-size: 18px;
+      color: #6b7280;
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-trigger.active .trigger-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .accordion-content.active {
+      max-height: 500px;
+    }
+
+    .content-inner {
+      padding: 16px 20px;
+      background-color: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .info-box {
+      display: flex;
+      gap: 12px;
+      padding: 16px;
+      background-color: #eff6ff;
+      border-left: 3px solid #2f67f6;
+      border-radius: 4px;
+    }
+
+    .info-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+    }
+
+    .info-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: #2f67f6;
+    }
+
+    .info-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #374151;
+    }
+
+    /* 애니메이션 */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .accordion-content.active .content-inner {
+      animation: fadeIn 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-title">🎨 Cafe24 UI 컴포넌트</div>
+    <div class="nav-links">
+      <a href="ServiceApplicationButtons.html">버튼</a>
+      <a href="AccordionSection.html" class="active">아코디언</a>
+      <a href="ProgressSteps.html">프로그레스</a>
+      <a href="WarningChecklist.html">체크리스트</a>
+      <a href="index.html">📋 전체보기</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <h2 class="section-title">자금세탁방지법 확인</h2>
+
+        <button class="accordion-trigger" id="accordionTrigger" onclick="toggleAccordion()">
+          <span class="trigger-text">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7zm2 11.7V15h-4v-1.3C8.2 12.9 7 11.1 7 9c0-2.8 2.2-5 5-5s5 2.2 5 5c0 2.1-1.2 3.9-3 4.7z"/>
+              <circle cx="12" cy="9" r="1.5" fill="currentColor"/>
+            </svg>
+            왜 필요한가요?
+          </span>
+          <span class="trigger-icon">▼</span>
+        </button>
+      </div>
+
+      <div class="accordion-content" id="accordionContent">
+        <div class="content-inner">
+          <div class="info-box">
+            <div class="info-icon">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm1 15H9V9h2v6zm0-8H9V5h2v2z"/>
+              </svg>
+            </div>
+            <p class="info-text">
+              특정 금융거래 정보의 보고 및 이용 등에 관한 법률 제5조의 2(이하 '특정금융정보법')에 따라 가입 시 또는 판매대급의 정산 지급 전 판매자의 신원확인 절차를 진행합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleAccordion() {
+      const trigger = document.getElementById('accordionTrigger');
+      const content = document.getElementById('accordionContent');
+
+      // 토글 상태 변경
+      trigger.classList.toggle('active');
+      content.classList.toggle('active');
+
+      // 접근성: aria-expanded 속성 업데이트
+      const isExpanded = content.classList.contains('active');
+      trigger.setAttribute('aria-expanded', isExpanded);
+
+      // 로그 출력
+      console.log(isExpanded ? '펼침' : '접음');
+    }
+
+    // 초기 접근성 속성 설정
+    document.addEventListener('DOMContentLoaded', function() {
+      const trigger = document.getElementById('accordionTrigger');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-controls', 'accordionContent');
+    });
+
+    // 키보드 접근성: Enter 또는 Space로도 토글 가능
+    document.getElementById('accordionTrigger').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleAccordion();
+      }
+    });
+  </script>
+</body>
+</html>

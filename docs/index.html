@@ -1,292 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>카페24 UI 컴포넌트 목록</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>카드 즉시할인 서비스 전체 흐름도</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-      background-color: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #2f67f6 0%, #1f47b6 100%);
-      color: #ffffff;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .header h1 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .header p {
-      font-size: 16px;
-      opacity: 0.9;
-    }
-
-    .content {
-      padding: 40px;
-    }
-
-    .component-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .component-card {
-      background-color: #f9fafb;
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .component-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #2f67f6, #667eea);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .component-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(47, 103, 246, 0.2);
-      border-color: #2f67f6;
-    }
-
-    .component-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #2f67f6, #667eea);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 24px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #1f2937;
-      margin-bottom: 8px;
-    }
-
-    .card-description {
-      font-size: 14px;
-      color: #6b7280;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background-color: #2f67f6;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .card-link:hover {
-      background-color: #2757d6;
-      transform: translateX(4px);
-    }
-
-    .card-link svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-
-    .footer {
-      padding: 24px 40px;
-      background-color: #f9fafb;
-      text-align: center;
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    /* Badge */
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      font-size: 12px;
-      font-weight: 500;
-      border-radius: 12px;
-      margin-bottom: 12px;
-    }
-
-    .badge-new {
-      background-color: #dcfce7;
-      color: #15803d;
-    }
-
-    .badge-updated {
-      background-color: #dbeafe;
-      color: #1e40af;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .header h1 {
-        font-size: 24px;
-      }
-
-      .content {
-        padding: 24px;
-      }
-
-      .component-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    body { font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif; background:#f5f5f5; padding:40px 20px; margin:0; }
+    .container { max-width:1600px; margin:0 auto; background:#fff; padding:32px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.08); }
+    h1 { text-align:center; color:#222; margin:0 0 18px 0; font-size:28px; }
+    pre.mermaid { display:flex; justify-content:center; background:#fff; padding:12px; border-radius:8px; overflow-x:auto; }
+    .mermaid svg { display:block; margin:0 auto; }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1>🎨 카페24 UI 컴포넌트</h1>
-      <p>생성된 컴포넌트를 바로 확인하세요</p>
-    </div>
-
-    <div class="content">
-      <div class="component-grid">
-        <!-- Card 1: Service Application Buttons -->
-        <div class="component-card">
-          <span class="badge badge-updated">Updated</span>
-          <div class="card-icon">🔘</div>
-          <h3 class="card-title">서비스 신청 버튼</h3>
-          <p class="card-description">
-            이전/완료 버튼이 포함된 서비스 신청 버튼 그룹입니다.
-          </p>
-          <a href="ServiceApplicationButtons.html" class="card-link">
-            바로 보기
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Card 2: Accordion Section -->
-        <div class="component-card">
-          <span class="badge badge-new">New</span>
-          <div class="card-icon">📋</div>
-          <h3 class="card-title">접기/펼치기 섹션</h3>
-          <p class="card-description">
-            자금세탁방지법 정보를 표시하는 아코디언 컴포넌트입니다.
-          </p>
-          <a href="AccordionSection.html" class="card-link">
-            바로 보기
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Card 3: Progress Steps -->
-        <div class="component-card">
-          <span class="badge badge-new">New</span>
-          <div class="card-icon">📊</div>
-          <h3 class="card-title">4단계 프로그레스 바</h3>
-          <p class="card-description">
-            본인인증 단계가 추가된 인터랙티브 프로그레스 바입니다.
-          </p>
-          <a href="ProgressSteps.html" class="card-link">
-            바로 보기
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Card 4: Warning Checklist -->
-        <div class="component-card">
-          <span class="badge badge-updated">Updated</span>
-          <div class="card-icon">⚠️</div>
-          <h3 class="card-title">경고 체크리스트</h3>
-          <p class="card-description">
-            심사 준비를 위한 노란색 경고 표시 체크리스트입니다.
-          </p>
-          <a href="WarningChecklist.html" class="card-link">
-            바로 보기
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      © 2026 Cafe24. All rights reserved. | Generated with cds-image-to-code skill
-    </div>
+    <h1>카드 즉시할인 서비스 전체 흐름도</h1>
+    <pre id="mmd" class="mermaid"></pre>
   </div>
-
   <script>
-    // 페이지 로드 시 애니메이션
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.component-card');
-      cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
+    const diagram = "flowchart TD\n  %% ===== Style =====\n  classDef db fill:#4a90e2,color:#fff,stroke:#2f6fbf,stroke-width:2px\n  classDef process fill:#ff9800,color:#fff,stroke:#d87f00,stroke-width:2px\n  classDef decision fill:#5bc0de,color:#fff,stroke:#2aa7c4,stroke-width:2px\n  classDef stage1 fill:#e8f4ff,stroke:#4a90e2,stroke-width:3px\n  classDef stage2 fill:#f0fff0,stroke:#5cb85c,stroke-width:3px\n  classDef stage3 fill:#fff8e8,stroke:#ff9800,stroke-width:3px\n  classDef stage4 fill:#e8f9ff,stroke:#5bc0de,stroke-width:3px\n  classDef stage5 fill:#f4f6ff,stroke:#6c7ae0,stroke-width:3px\n  classDef screen fill:#ffffff,color:#111,stroke:#333,stroke-width:1px\n\n  %% ===== 1\ub2e8\uacc4: \ud504\ub85c\ubaa8\uc158 \ud611\uc758 =====\n  subgraph S1[\"1\ub2e8\uacc4: \ud504\ub85c\ubaa8\uc158 \ud611\uc758\"]\n    direction LR\n    A1[(\"\uce74\ub4dc\uc0ac<br/>(\uc2e0\ud55c, \uad6d\ubbfc \ub4f1)\")]\n    A2[\"\uc989\uc2dc\ud560\uc778 \ud611\uc758<br/>\u2022 \ud560\uc778 \uc870\uac74/\uae08\uc561<br/>\u2022 \uc608\uc0b0 \uaddc\ubaa8<br/>\u2022 \uc9c4\ud589 \uae30\uac04\"]\n    A3[(\"PG\uc0ac<br/>(KCP \ub4f1)\")]\n    A1 --> A2 --> A3\n  end\n  class S1 stage1\n  class A1,A3 db\n  class A2 process\n\n  %% ===== 2\ub2e8\uacc4: \uac00\ub9f9\uc810 \uc548\ub0b4 \ubc0f \uc138\ud305 =====\n  subgraph S2[\"2\ub2e8\uacc4: \uac00\ub9f9\uc810 \uc548\ub0b4 \ubc0f \uc138\ud305\"]\n    direction LR\n    B2[(\"PG\uc0ac\")]\n    B1[\"\ud504\ub85c\ubaa8\uc158 \uc548\ub0b4<br/>\u2022 \ucc38\uc5ec \uc870\uac74<br/>\u2022 \uc2dc\uc791/\uc885\ub8cc \uc77c\uc2dc\"]\n    B3[(\"\uac00\ub9f9\uc810\")]\n    B4[\"PG \uc5b4\ub4dc\ubbfc \uc138\ud305<br/>\u2022 MID\ubcc4 \uc989\uc2dc\ud560\uc778 \uc124\uc815<br/>\u2022 \uce74\ub4dc\uc0ac\ubcc4 \ud560\uc778 \uc870\uac74<br/>\u2022 \uc2dc\uc791/\uc885\ub8cc \uc77c\uc2dc<br/>\u2022 \uc608\uc0b0 \ud55c\ub3c4\"]\n    B2 --> B1 --> B3\n    B2 --> B4\n  end\n  class S2 stage2\n  class B2,B3 db\n  class B1 process\n  class B4 db\n\n  %% ===== 3\ub2e8\uacc4: \uce74\ud39824 \uc124\uc815 (\ud654\uba74 \uc0bd\uc785) =====\n  subgraph S3[\"3\ub2e8\uacc4: \uce74\ud39824 \uc124\uc815 (\uc5b4\ub4dc\ubbfc \ud654\uba74)\"]\n    direction LR\n    C1[\"<div style='width:300px;text-align:center;'><div style='font-weight:700;margin-bottom:8px;'>\uce74\ud39824 \uc5b4\ub4dc\ubbfc \u00b7 \uc989\uc2dc\ud560\uc778 \uad00\ub9ac</div><img src='stage3_admin.png' style='width:300px;border:1px solid #d9d9d9;border-radius:10px;display:block;margin:0 auto;'/></div>\"]\n    C2[\"\ub178\ucd9c ON\"]\n    C3[\"PG API \ud638\ucd9c<br/>(\uc989\uc2dc\ud560\uc778 \uc815\ubcf4 \uc870\ud68c)\"]\n    C4[(\"\uce74\ud39824<br/>(\uc11c\ubc84)\")]\n    C1 --> C2 --> C3 --> C4\n  end\n  class S3 stage3\n  class C1 screen\n  class C2,C3 process\n  class C4 db\n\n  %% ===== 4\ub2e8\uacc4: \uc11c\ube44\uc2a4 \uc6b4\uc601 (\ubaa8\ubc14\uc77c \ud654\uba74 \uc0bd\uc785) =====\n  subgraph S4[\"4\ub2e8\uacc4: \uc11c\ube44\uc2a4 \uc6b4\uc601 (\uc8fc\ubb38\uc11c \u2192 PG\ucc3d)\"]\n    direction TB\n    D1[\"<div style='width:300px;text-align:center;'><div style='font-weight:700;margin-bottom:8px;'>\uc8fc\ubb38/\uacb0\uc81c \u2192 PG \uacb0\uc81c\ucc3d</div><img src='stage4_mobile.png' style='width:300px;border:1px solid #d9d9d9;border-radius:14px;display:block;margin:0 auto;'/></div>\"]\n    D2[\"\uacb0\uc81c \uc9c4\ud589\"]\n    D3[\"\u203b \ub178\ucd9c \uc704\uce58: \uc8fc\ubb38\uc11c \uae30\ubcf8 / (\uc635\uc158) \uc0c1\ud488\uc0c1\uc138\u00b7\uc7a5\ubc14\uad6c\ub2c8 \ub4f1 \ud655\uc7a5 \uac00\ub2a5<br/>\u203b \uc0c1\ud488\ub2e8 \ub178\ucd9c \ubc0f \uc704\uce58\ub294 \uae30\ud68d \uac80\ud1a0 \ud544\uc694\"]\n    D1 --> D2\n    D2 -.-> D3\n  end\n  class S4 stage4\n  class D1 screen\n  class D2 process\n  class D3 process\n\n  %% ===== 5\ub2e8\uacc4: \uc989\uc2dc\ud560\uc778 \uc885\ub8cc \ucf00\uc774\uc2a4 (\uc6d0\ubcf8 \uc720\uc9c0) =====\n  subgraph S5[\"5\ub2e8\uacc4: \uc989\uc2dc\ud560\uc778 \uc885\ub8cc \ucf00\uc774\uc2a4\"]\n    direction LR\n    E1[\"\uc989\uc2dc\ud560\uc778 ON \uc0c1\ud0dc\"]\n    E2{\"\uae30\ud55c \ub0b4 \uc608\uc0b0 \uc18c\uc9c4 \uc5ec\ubd80\"}\n\n    E3A[\"Case A<br/>\uc608\uc0b0 \ubbf8\uc18c\uc9c4\"]\n    E4A[\"\uc885\ub8cc \uc77c\uc790 \ub3c4\ub2ec\"]\n    E5A[\"\uc790\ub3d9 OFF \ucc98\ub9ac<br/>\uc989\uc2dc\ud560\uc778 \uc885\ub8cc\"]\n\n    E3B[\"Case B<br/>\uc608\uc0b0 \uc870\uae30 \uc18c\uc9c4\"]\n    E4B[\"PG\uc0ac \u2192 \uac00\ub9f9\uc810 \uc548\ub0b4\"]\n    E5B[\"\uac00\ub9f9\uc810 EC \uc5b4\ub4dc\ubbfc OFF<br/>\uc989\uc2dc\ud560\uc778 \uc885\ub8cc\"]\n\n    E1 --> E2\n    E2 -->|\ubbf8\uc18c\uc9c4| E3A --> E4A --> E5A\n    E2 -->|\uc870\uae30 \uc18c\uc9c4| E3B --> E4B --> E5B\n  end\n  class S5 stage5\n  class E1,E3A,E3B db\n  class E2 decision\n  class E4A,E4B process\n  class E5A,E5B process\n\n  %% ===== Main Flow =====\n  S1 --> S2 --> S3 --> S4 --> S5\n";
+    const el = document.getElementById('mmd');
+    el.textContent = diagram;
 
-        setTimeout(() => {
-          card.style.transition = 'all 0.5s ease';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, index * 100);
-      });
-    });
-
-    // 링크 클릭 로깅
-    document.querySelectorAll('.card-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const componentName = this.closest('.component-card').querySelector('.card-title').textContent;
-        console.log(`${componentName} 컴포넌트 열기`);
-      });
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "default",
+      securityLevel: "loose",
+      maxTextSize: 5000000,
+      flowchart: { htmlLabels: true, useMaxWidth: true, curve: "basis" }
     });
   </script>
 </body>
